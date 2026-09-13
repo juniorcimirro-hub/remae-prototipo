@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ReMãe — Entrar</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="login-wrap">
+  <div class="card login-card">
+    <div class="logo" style="text-align:center; margin-bottom:18px;">Re<span>Mãe</span></div>
+
+    <div class="abas">
+      <button id="aba-entrar-btn" class="ativo" onclick="mostrarAba('entrar')">Entrar</button>
+      <button id="aba-cadastrar-btn" onclick="mostrarAba('cadastrar')">Cadastrar</button>
+    </div>
+
+    <form id="form-entrar" onsubmit="event.preventDefault(); window.location.href='index.html';">
+      <label for="email-entrar">E-mail</label>
+      <input type="email" id="email-entrar" placeholder="seuemail@exemplo.com" required>
+
+      <label for="senha-entrar">Senha</label>
+      <input type="password" id="senha-entrar" placeholder="••••••••" required>
+
+      <button type="submit" class="btn" style="width:100%; margin-top:18px;">Entrar</button>
+    </form>
+
+    <form id="form-cadastrar" class="form-oculto" onsubmit="event.preventDefault(); window.location.href='index.html';">
+      <label for="nome-cad">Nome</label>
+      <input type="text" id="nome-cad" placeholder="Seu nome" required>
+
+      <label for="cidade-cad">Cidade</label>
+      <input type="text" id="cidade-cad" placeholder="Sua cidade" required>
+
+      <label for="email-cad">E-mail</label>
+      <input type="email" id="email-cad" placeholder="seuemail@exemplo.com" required>
+
+      <label for="senha-cad">Senha</label>
+      <input type="password" id="senha-cad" placeholder="Crie uma senha" required>
+
+      <label style="display:flex; align-items:flex-start; gap:8px; font-weight:400; margin-top:16px;">
+        <input type="checkbox" required style="width:auto; margin-top:4px;">
+        <span>Li e aceito a <a href="privacidade.html" target="_blank" style="color:var(--cor-primaria-escura); font-weight:600;">Política de Privacidade e Termos de Uso</a></span>
+      </label>
+
+      <button type="submit" class="btn" style="width:100%; margin-top:18px;">Criar conta</button>
+    </form>
+
+    <div class="aviso">
+      Este é um protótipo de estudo. Nenhum dado digitado aqui é enviado a um servidor —
+      é só para simular o fluxo de login/cadastro do app.
+    </div>
+  </div>
+</div>
+
+<script>
+function mostrarAba(aba) {
+  const entrarBtn = document.getElementById('aba-entrar-btn');
+  const cadastrarBtn = document.getElementById('aba-cadastrar-btn');
+  const formEntrar = document.getElementById('form-entrar');
+  const formCadastrar = document.getElementById('form-cadastrar');
+
+  if (aba === 'entrar') {
+    entrarBtn.classList.add('ativo');
+    cadastrarBtn.classList.remove('ativo');
+    formEntrar.classList.remove('form-oculto');
+    formCadastrar.classList.add('form-oculto');
+  } else {
+    cadastrarBtn.classList.add('ativo');
+    entrarBtn.classList.remove('ativo');
+    formCadastrar.classList.remove('form-oculto');
+    formEntrar.classList.add('form-oculto');
+  }
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ReMãe — Detalhe da vaga</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="navbar-inner">
+    <a href="index.html" class="logo">Re<span>Mãe</span></a>
+    <div class="nav-links">
+      <a href="index.html">Início</a>
+      <a href="vagas.html" class="ativo">Vagas</a>
+      <a href="forum.html">Fórum</a>
+      <a href="comunidade.html">Comunidade</a>
+      <a href="empreendedorismo.html">Empreendedorismo</a>
+      <a href="direitos.html">Direitos</a>
+      <a href="simulador.html">Simulador IA</a>
+    </div>
+    <a href="perfil.html" class="nav-perfil"><span class="avatar">F</span></a>
+  </div>
+</nav>
+
+<div class="container">
+  <a href="vagas.html" class="voltar">&larr; Voltar para vagas</a>
+
+  <div id="conteudo-vaga" class="card"></div>
+
+  <div id="confirmacao" class="mensagem-sucesso"></div>
+
+  <footer>Protótipo de estudo — ReMãe. Todos os dados exibidos são fictícios. · <a href="privacidade.html">Política de Privacidade</a></footer>
+</div>
+
+<script src="js/data.js"></script>
+<script>
+const params = new URLSearchParams(window.location.search);
+const id = parseInt(params.get('id'));
+const vaga = vagas.find(v => v.id === id);
+const container = document.getElementById('conteudo-vaga');
+
+if (vaga) {
+  container.innerHTML = `
+    ${vaga.selo ? '<span class="tag selo">Selo Empresa Amiga da Maternidade</span>' : ''}
+    <h1>${vaga.titulo}</h1>
+    <div class="empresa">${vaga.empresa} · ${vaga.local}</div>
+    <span class="tag">${vaga.modalidade}</span>
+    <span class="tag">${vaga.tipo}</span>
+
+    <h3 style="margin-top:20px;">Descrição</h3>
+    <p>${vaga.descricao}</p>
+
+    <h3>Requisitos</h3>
+    <ul class="lista-requisitos">
+      ${vaga.requisitos.map(r => `<li>${r}</li>`).join('')}
+    </ul>
+
+    <button class="btn" onclick="candidatar()">Candidatar-se</button>
+  `;
+} else {
+  container.innerHTML = '<p>Vaga não encontrada.</p>';
+}
+
+function candidatar() {
+  const msg = document.getElementById('confirmacao');
+  msg.textContent = 'Candidatura enviada! (simulação — nenhum dado foi enviado de verdade)';
+  msg.style.display = 'block';
+}
+</script>
+
+</body>
+</html>

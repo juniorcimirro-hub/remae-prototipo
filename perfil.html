@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ReMãe — Perfil</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="navbar-inner">
+    <a href="index.html" class="logo">Re<span>Mãe</span></a>
+    <div class="nav-links">
+      <a href="index.html">Início</a>
+      <a href="vagas.html">Vagas</a>
+      <a href="forum.html">Fórum</a>
+      <a href="comunidade.html">Comunidade</a>
+      <a href="empreendedorismo.html">Empreendedorismo</a>
+      <a href="direitos.html">Direitos</a>
+      <a href="simulador.html">Simulador IA</a>
+    </div>
+    <a href="perfil.html" class="nav-perfil ativo"><span class="avatar">F</span></a>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="perfil-topo">
+    <span class="avatar">F</span>
+    <div>
+      <h1 style="margin:0;">Fernanda Martins</h1>
+      <p style="margin:0; color:var(--cor-texto-suave);">São Paulo - SP</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <form onsubmit="event.preventDefault(); salvarPerfil();">
+      <label for="nome">Nome</label>
+      <input type="text" id="nome" value="Fernanda Martins">
+
+      <label for="cidade">Cidade</label>
+      <input type="text" id="cidade" value="São Paulo - SP">
+
+      <label for="experiencias">Experiências profissionais</label>
+      <textarea id="experiencias" rows="3">Assistente administrativa (3 anos) — Comércio Ltda.</textarea>
+
+      <label for="habilidades">Habilidades</label>
+      <input type="text" id="habilidades" value="Pacote Office, atendimento ao cliente, organização">
+
+      <label for="disponibilidade">Disponibilidade</label>
+      <select id="disponibilidade">
+        <option>Meio período</option>
+        <option>Período integral</option>
+        <option>Apenas remoto</option>
+        <option>Flexível</option>
+      </select>
+
+      <label for="modalidade">Modalidade desejada</label>
+      <select id="modalidade">
+        <option>Remoto</option>
+        <option>Híbrido</option>
+        <option>Presencial</option>
+        <option>Tanto faz</option>
+      </select>
+
+      <button type="submit" class="btn" style="margin-top:18px;">Salvar alterações</button>
+    </form>
+
+    <div id="mensagem-sucesso" class="mensagem-sucesso">Perfil atualizado com sucesso!</div>
+  </div>
+
+  <footer>Protótipo de estudo — ReMãe. Todos os dados exibidos são fictícios. · <a href="privacidade.html">Política de Privacidade</a></footer>
+</div>
+
+<script>
+function salvarPerfil() {
+  const msg = document.getElementById('mensagem-sucesso');
+  msg.style.display = 'block';
+}
+</script>
+
+</body>
+</html>

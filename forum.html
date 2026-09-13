@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ReMãe — Fórum</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="navbar-inner">
+    <a href="index.html" class="logo">Re<span>Mãe</span></a>
+    <div class="nav-links">
+      <a href="index.html">Início</a>
+      <a href="vagas.html">Vagas</a>
+      <a href="forum.html" class="ativo">Fórum</a>
+      <a href="comunidade.html">Comunidade</a>
+      <a href="empreendedorismo.html">Empreendedorismo</a>
+      <a href="direitos.html">Direitos</a>
+      <a href="simulador.html">Simulador IA</a>
+    </div>
+    <a href="perfil.html" class="nav-perfil"><span class="avatar">F</span></a>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="page-header">
+    <h1>Rede de apoio</h1>
+    <p>Um fórum entre mães, organizado por tema — como um Reddit só nosso.</p>
+  </div>
+
+  <div class="card diretrizes">
+    <strong>📋 Diretrizes da comunidade:</strong> respeite as demais mães, não compartilhe dados pessoais de terceiros,
+    não faça propaganda fora da aba de Empreendedorismo e denuncie qualquer conteúdo ofensivo ou suspeito de golpe.
+    Nossa equipe de moderação revisa denúncias em até 24h.
+  </div>
+
+  <div id="categorias" class="grid" style="margin-bottom:32px;"></div>
+
+  <div id="lista-topicos"></div>
+
+  <footer>Protótipo de estudo — ReMãe. Todos os dados exibidos são fictícios. · <a href="privacidade.html">Política de Privacidade</a></footer>
+</div>
+
+<script src="js/data.js"></script>
+<script>
+const categoriasDiv = document.getElementById('categorias');
+categoriasDiv.innerHTML = forumCategorias.map(c => `
+  <div class="card categoria-card">
+    <div class="icone" style="font-size:1.6rem;">${c.icone}</div>
+    <h3 style="margin:8px 0 4px;">${c.nome}</h3>
+    <p style="color:var(--cor-texto-suave); font-size:0.9rem; margin:0;">${c.descricao}</p>
+  </div>
+`).join('');
+
+const listaDiv = document.getElementById('lista-topicos');
+listaDiv.innerHTML = forumCategorias.map(c => {
+  const topicosDaCategoria = topicos.filter(t => t.categoria === c.id);
+  return `
+    <h2 style="color:var(--cor-primaria-escura); margin-top:24px;">${c.icone} ${c.nome}</h2>
+    <div class="card">
+      ${topicosDaCategoria.map(t => `
+        <div class="topico-item">
+          <h4><a href="topico.html?id=${t.id}">${t.titulo}</a></h4>
+          <div class="topico-meta">${t.autora} · ${t.data} · ${t.respostas.length} resposta(s)</div>
+        </div>
+      `).join('') || '<p>Nenhum tópico ainda nesta categoria.</p>'}
+    </div>
+  `;
+}).join('');
+</script>
+
+</body>
+</html>

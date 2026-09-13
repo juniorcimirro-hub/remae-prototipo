@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ReMãe — Simulador com IA</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="navbar-inner">
+    <a href="index.html" class="logo">Re<span>Mãe</span></a>
+    <div class="nav-links">
+      <a href="index.html">Início</a>
+      <a href="vagas.html">Vagas</a>
+      <a href="forum.html">Fórum</a>
+      <a href="comunidade.html">Comunidade</a>
+      <a href="empreendedorismo.html">Empreendedorismo</a>
+      <a href="direitos.html">Direitos</a>
+      <a href="simulador.html" class="ativo">Simulador IA</a>
+    </div>
+    <a href="perfil.html" class="nav-perfil"><span class="avatar">F</span></a>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="page-header">
+    <h1>Simulador de currículo e entrevista</h1>
+    <p>O app monta um prompt pronto pra você colar em uma IA gratuita — assim não dependemos de uma IA paga
+    dentro do próprio ReMãe.</p>
+  </div>
+
+  <div class="abas">
+    <button id="aba-curriculo-btn" class="ativo" onclick="mostrarAba('curriculo')">Currículo</button>
+    <button id="aba-entrevista-btn" onclick="mostrarAba('entrevista')">Entrevista</button>
+  </div>
+
+  <!-- ===== ABA CURRÍCULO ===== -->
+  <div id="painel-curriculo">
+    <div class="card">
+      <label for="cv-nome">Nome</label>
+      <input type="text" id="cv-nome" value="Fernanda Martins">
+
+      <label for="cv-cargo">Cargo desejado</label>
+      <input type="text" id="cv-cargo" value="Assistente Administrativa">
+
+      <label for="cv-experiencias">Experiências (resumidas)</label>
+      <textarea id="cv-experiencias" rows="2">Assistente administrativa (3 anos) — Comércio Ltda. Pausa de 2 anos para maternidade.</textarea>
+
+      <label for="cv-habilidades">Habilidades</label>
+      <input type="text" id="cv-habilidades" value="Pacote Office, atendimento ao cliente, organização">
+
+      <button class="btn" style="margin-top:16px;" onclick="gerarPromptCurriculo()">Gerar prompt de currículo</button>
+    </div>
+
+    <div id="resultado-curriculo" class="card form-oculto" style="margin-top:16px;">
+      <label for="texto-prompt-cv">Prompt pronto — copie e cole em uma IA gratuita</label>
+      <textarea id="texto-prompt-cv" rows="6" readonly></textarea>
+      <button class="btn" style="margin-top:10px;" onclick="copiarTexto('texto-prompt-cv')">📋 Copiar prompt</button>
+      <p style="margin-top:14px; font-size:0.9rem; color:var(--cor-texto-suave);">Agora abra uma dessas IAs gratuitas e cole o prompt:</p>
+      <a class="btn secundario" href="https://chat.openai.com" target="_blank" rel="noopener">ChatGPT</a>
+      <a class="btn secundario" href="https://gemini.google.com" target="_blank" rel="noopener">Google Gemini</a>
+      <a class="btn secundario" href="https://copilot.microsoft.com" target="_blank" rel="noopener">Copilot</a>
+    </div>
+  </div>
+
+  <!-- ===== ABA ENTREVISTA ===== -->
+  <div id="painel-entrevista" class="form-oculto">
+    <div class="card">
+      <div class="topico-meta">Pergunta simulada</div>
+      <h3 id="pergunta-atual" style="margin:6px 0 14px;"></h3>
+
+      <label for="resposta-usuaria">Como você responderia?</label>
+      <textarea id="resposta-usuaria" rows="3" placeholder="Escreva sua resposta aqui pra treinar..."></textarea>
+
+      <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
+        <button class="btn" onclick="novaPergunta()">🔁 Nova pergunta</button>
+        <button class="btn secundario" onclick="alternarDica()">💡 Ver dica de resposta</button>
+      </div>
+
+      <div id="dica-resposta" class="aviso form-oculto" style="margin-top:14px;"></div>
+    </div>
+
+    <div class="card" style="margin-top:16px;">
+      <p>Quer uma entrevista mais dinâmica, com perguntas de acompanhamento de verdade? Gere um prompt e leve
+      para uma IA gratuita conversar com você:</p>
+      <button class="btn" onclick="gerarPromptEntrevista()">Gerar prompt de entrevista simulada</button>
+
+      <div id="resultado-entrevista" class="form-oculto" style="margin-top:14px;">
+        <label for="texto-prompt-entrevista">Prompt pronto — copie e cole em uma IA gratuita</label>
+        <textarea id="texto-prompt-entrevista" rows="5" readonly></textarea>
+        <button class="btn" style="margin-top:10px;" onclick="copiarTexto('texto-prompt-entrevista')">📋 Copiar prompt</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="aviso" style="margin-top:20px;">
+    ⚠️ IAs gratuitas têm limite de uso e podem exigir cadastro após um tempo. Nunca coloque dados sensíveis
+    (como CPF ou endereço completo) nesses prompts.
+  </div>
+
+  <footer>Protótipo de estudo — ReMãe. · <a href="privacidade.html">Política de Privacidade</a></footer>
+</div>
+
+<script>
+const perguntasEntrevista = [
+  { pergunta: "Fale um pouco sobre você e sua trajetória profissional.", dica: "Conte sua experiência de forma objetiva, incluindo o período de pausa com naturalidade — ele faz parte da sua trajetória, não é uma falha." },
+  { pergunta: "Por que você ficou um tempo fora do mercado de trabalho?", dica: "Seja direta e positiva: cite a maternidade sem se desculpar, e se puder, mencione algo que aprendeu ou fez nesse período (curso, projeto pessoal)." },
+  { pergunta: "Como você concilia a vida profissional com a maternidade?", dica: "Mostre que você já pensou em uma rotina viável (rede de apoio, escola/creche, organização) sem prometer disponibilidade irreal." },
+  { pergunta: "Quais são seus pontos fortes?", dica: "Escolha 2 ou 3 pontos e dê um exemplo curto e real de cada um em vez de só listar adjetivos." },
+  { pergunta: "Onde você se vê daqui a 2 anos?", dica: "Fale de crescimento realista dentro da área da vaga, mostrando interesse em continuar se desenvolvendo." },
+  { pergunta: "Por que devemos te contratar?", dica: "Conecte suas habilidades diretamente com o que a vaga pede — releia a descrição da vaga antes de responder." }
+];
+
+let indiceAtual = 0;
+
+function mostrarAba(aba) {
+  document.getElementById('aba-curriculo-btn').classList.toggle('ativo', aba === 'curriculo');
+  document.getElementById('aba-entrevista-btn').classList.toggle('ativo', aba === 'entrevista');
+  document.getElementById('painel-curriculo').classList.toggle('form-oculto', aba !== 'curriculo');
+  document.getElementById('painel-entrevista').classList.toggle('form-oculto', aba !== 'entrevista');
+}
+
+function gerarPromptCurriculo() {
+  const nome = document.getElementById('cv-nome').value;
+  const cargo = document.getElementById('cv-cargo').value;
+  const experiencias = document.getElementById('cv-experiencias').value;
+  const habilidades = document.getElementById('cv-habilidades').value;
+
+  const prompt = `Aja como um especialista em recrutamento e me ajude a escrever um currículo e uma carta de apresentação.
+
+Nome: ${nome}
+Cargo desejado: ${cargo}
+Experiências: ${experiencias}
+Habilidades: ${habilidades}
+
+Contexto importante: estou retornando ao mercado de trabalho após um período dedicado à maternidade. Quero que o currículo destaque minhas competências com confiança, sem soar como uma desculpa pelo tempo fora do mercado.
+
+Por favor, gere:
+1. Um currículo em formato de tópicos, pronto para copiar;
+2. Uma carta de apresentação curta (máximo 150 palavras) para a vaga de ${cargo}.`;
+
+  document.getElementById('texto-prompt-cv').value = prompt;
+  document.getElementById('resultado-curriculo').classList.remove('form-oculto');
+}
+
+function novaPergunta() {
+  indiceAtual = Math.floor(Math.random() * perguntasEntrevista.length);
+  document.getElementById('pergunta-atual').textContent = perguntasEntrevista[indiceAtual].pergunta;
+  document.getElementById('resposta-usuaria').value = '';
+  document.getElementById('dica-resposta').classList.add('form-oculto');
+}
+
+function alternarDica() {
+  const dica = document.getElementById('dica-resposta');
+  dica.textContent = '💡 ' + perguntasEntrevista[indiceAtual].dica;
+  dica.classList.toggle('form-oculto');
+}
+
+function gerarPromptEntrevista() {
+  const cargo = document.getElementById('cv-cargo') ? document.getElementById('cv-cargo').value : "Assistente Administrativa";
+  const prompt = `Aja como um entrevistador de RH simulando uma entrevista de emprego para a vaga de ${cargo}.
+
+Estou me candidatando após um período fora do mercado de trabalho por conta da maternidade. Me faça uma pergunta de cada vez, espere minha resposta, e depois me dê um feedback curto e construtivo antes de fazer a próxima pergunta. Comece agora com a primeira pergunta.`;
+
+  document.getElementById('texto-prompt-entrevista').value = prompt;
+  document.getElementById('resultado-entrevista').classList.remove('form-oculto');
+}
+
+async function copiarTexto(idCampo) {
+  const campo = document.getElementById(idCampo);
+  try {
+    await navigator.clipboard.writeText(campo.value);
+  } catch (e) {
+    campo.select();
+  }
+}
+
+novaPergunta();
+</script>
+
+</body>
+</html>

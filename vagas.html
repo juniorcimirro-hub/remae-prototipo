@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ReMãe — Vagas Afirmativas</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="navbar-inner">
+    <a href="index.html" class="logo">Re<span>Mãe</span></a>
+    <div class="nav-links">
+      <a href="index.html">Início</a>
+      <a href="vagas.html" class="ativo">Vagas</a>
+      <a href="forum.html">Fórum</a>
+      <a href="comunidade.html">Comunidade</a>
+      <a href="empreendedorismo.html">Empreendedorismo</a>
+      <a href="direitos.html">Direitos</a>
+      <a href="simulador.html">Simulador IA</a>
+    </div>
+    <a href="perfil.html" class="nav-perfil"><span class="avatar">F</span></a>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="page-header">
+    <h1>Vagas afirmativas</h1>
+    <p>Oportunidades de empresas parceiras, pensadas para mães voltando ao mercado de trabalho.</p>
+  </div>
+
+  <div class="filtros">
+    <select id="filtro-modalidade">
+      <option value="">Todas as modalidades</option>
+      <option value="Remoto">Remoto</option>
+      <option value="Híbrido">Híbrido</option>
+      <option value="Presencial">Presencial</option>
+    </select>
+
+    <select id="filtro-tipo">
+      <option value="">Todos os tipos</option>
+      <option value="Meio período">Meio período</option>
+      <option value="Estágio">Estágio</option>
+      <option value="Primeiro emprego após maternidade">Primeiro emprego após maternidade</option>
+      <option value="Empreendedorismo">Empreendedorismo</option>
+    </select>
+  </div>
+
+  <div id="lista-vagas" class="grid"></div>
+
+  <footer>Protótipo de estudo — ReMãe. Todos os dados exibidos são fictícios. · <a href="privacidade.html">Política de Privacidade</a></footer>
+</div>
+
+<script src="js/data.js"></script>
+<script>
+function renderizarVagas() {
+  const modalidade = document.getElementById('filtro-modalidade').value;
+  const tipo = document.getElementById('filtro-tipo').value;
+  const lista = document.getElementById('lista-vagas');
+
+  const filtradas = vagas.filter(v =>
+    (modalidade === '' || v.modalidade === modalidade) &&
+    (tipo === '' || v.tipo === tipo)
+  );
+
+  lista.innerHTML = filtradas.map(v => `
+    <a href="vaga-detalhe.html?id=${v.id}" class="card vaga-card">
+      ${v.selo ? '<span class="tag selo">Selo Empresa Amiga da Maternidade</span>' : ''}
+      <h3>${v.titulo}</h3>
+      <div class="empresa">${v.empresa} · ${v.local}</div>
+      <span class="tag">${v.modalidade}</span>
+      <span class="tag">${v.tipo}</span>
+    </a>
+  `).join('') || '<p>Nenhuma vaga encontrada com esses filtros.</p>';
+}
+
+document.getElementById('filtro-modalidade').addEventListener('change', renderizarVagas);
+document.getElementById('filtro-tipo').addEventListener('change', renderizarVagas);
+
+renderizarVagas();
+</script>
+
+</body>
+</html>

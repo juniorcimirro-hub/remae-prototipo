@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ReMãe — Comunidade</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="navbar-inner">
+    <a href="index.html" class="logo">Re<span>Mãe</span></a>
+    <div class="nav-links">
+      <a href="index.html">Início</a>
+      <a href="vagas.html">Vagas</a>
+      <a href="forum.html">Fórum</a>
+      <a href="comunidade.html" class="ativo">Comunidade</a>
+      <a href="empreendedorismo.html">Empreendedorismo</a>
+      <a href="direitos.html">Direitos</a>
+      <a href="simulador.html">Simulador IA</a>
+    </div>
+    <a href="perfil.html" class="nav-perfil"><span class="avatar">F</span></a>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="page-header">
+    <h1>Comunidade</h1>
+    <p>Compartilhe conquistas, peça ajuda, faça networking — um feed aberto entre todas as mães do ReMãe.</p>
+  </div>
+
+  <div class="card" style="margin-bottom:20px;">
+    <label for="novo-post">Compartilhar algo com a comunidade</label>
+    <textarea id="novo-post" rows="2" placeholder="No que você está pensando hoje?"></textarea>
+    <button class="btn" style="margin-top:10px;" onclick="publicarPost()">Publicar</button>
+  </div>
+
+  <div id="feed"></div>
+
+  <div id="confirmacao-denuncia" class="mensagem-sucesso" style="background:#fff2e0; color:#7a4b00;"></div>
+
+  <footer>Protótipo de estudo — ReMãe. Publicações e curtidas ficam só nesta sessão do navegador. · <a href="privacidade.html">Política de Privacidade</a></footer>
+</div>
+
+<script src="js/data.js"></script>
+<script>
+const rotulos = {
+  conquista: { texto: "🏆 Conquista", classe: "sucesso" },
+  divulgação: { texto: "📣 Divulgação", classe: "" },
+  "pedido de ajuda": { texto: "🙋 Pedido de ajuda", classe: "selo" },
+  networking: { texto: "🤝 Networking", classe: "" }
+};
+
+function renderizarFeed() {
+  const feed = document.getElementById('feed');
+  feed.innerHTML = comunidadePosts.map((p, i) => {
+    const rotulo = rotulos[p.tipo] || { texto: p.tipo, classe: "" };
+    return `
+    <div class="card" style="margin-bottom:16px;">
+      <div style="display:flex; justify-content:space-between; align-items:start;">
+        <div>
+          <strong>${p.autora}</strong>
+          <div class="topico-meta">${p.cargo}</div>
+        </div>
+        <span class="tag ${rotulo.classe}">${rotulo.texto}</span>
+      </div>
+      <p style="margin:12px 0;">${p.texto}</p>
+      <div style="display:flex; gap:16px; align-items:center;">
+        <button class="denunciar-link" style="color:var(--cor-primaria-escura); font-weight:600;" onclick="curtir(${i})">👍 Curtir (${p.curtidas})</button>
+        <span class="topico-meta">${p.comentarios.length} comentário(s)</span>
+        <button class="denunciar-link" onclick="denunciarPost(${i})">🚩 Denunciar</button>
+      </div>
+      ${p.comentarios.map(c => `
+        <div class="resposta" style="margin-top:10px;">
+          <div class="autora">${c.autora}</div>
+          <div>${c.texto}</div>
+        </div>
+      `).join('')}
+      <div style="margin-top:10px; display:flex; gap:8px;">
+        <input type="text" id="comentario-${i}" placeholder="Escreva um comentário..." style="flex:1;">
+        <button class="btn secundario" onclick="comentar(${i})">Comentar</button>
+      </div>
+    </div>
+  `;
+  }).join('');
+}
+
+function curtir(i) {
+  comunidadePosts[i].curtidas++;
+  renderizarFeed();
+}
+
+function comentar(i) {
+  const campo = document.getElementById(`comentario-${i}`);
+  const texto = campo.value.trim();
+  if (!texto) return;
+  comunidadePosts[i].comentarios.push({ autora: 'Você', texto });
+  renderizarFeed();
+}
+
+function denunciarPost(i) {
+  const msg = document.getElementById('confirmacao-denuncia');
+  msg.textContent = 'Denúncia enviada. Nossa equipe vai revisar em até 24h (simulação).';
+  msg.style.display = 'block';
+  setTimeout(() => { msg.style.display = 'none'; }, 3500);
+}
+
+function publicarPost() {
+  const campo = document.getElementById('novo-post');
+  const texto = campo.value.trim();
+  if (!texto) return;
+
+  comunidadePosts.unshift({
+    id: comunidadePosts.length + 1,
+    autora: "Você",
+    cargo: "Membro da comunidade ReMãe",
+    tipo: "networking",
+    texto,
+    curtidas: 0,
+    comentarios: []
+  });
+
+  campo.value = '';
+  renderizarFeed();
+}
+
+renderizarFeed();
+</script>
+
+</body>
+</html>

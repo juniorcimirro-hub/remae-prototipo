@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ReMãe — Empreendedorismo</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="navbar-inner">
+    <a href="index.html" class="logo">Re<span>Mãe</span></a>
+    <div class="nav-links">
+      <a href="index.html">Início</a>
+      <a href="vagas.html">Vagas</a>
+      <a href="forum.html">Fórum</a>
+      <a href="comunidade.html">Comunidade</a>
+      <a href="empreendedorismo.html" class="ativo">Empreendedorismo</a>
+      <a href="direitos.html">Direitos</a>
+      <a href="simulador.html">Simulador IA</a>
+    </div>
+    <a href="perfil.html" class="nav-perfil"><span class="avatar">F</span></a>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="page-header">
+    <h1>Empreendedorismo</h1>
+    <p>Conheça negócios de outras mães da comunidade — ou divulgue o seu.</p>
+  </div>
+
+  <button class="btn" style="margin-bottom:20px;" onclick="abrirFormulario()">+ Anunciar meu negócio</button>
+
+  <div id="form-anuncio" class="card form-oculto" style="margin-bottom:20px;">
+    <label for="nome-produto">Nome do negócio/produto</label>
+    <input type="text" id="nome-produto" placeholder="Ex: Doces da Carla">
+
+    <label for="categoria-produto">Categoria</label>
+    <input type="text" id="categoria-produto" placeholder="Ex: Doces, Artesanato, Serviços...">
+
+    <label for="cidade-produto">Cidade</label>
+    <input type="text" id="cidade-produto" placeholder="Ex: Recife - PE">
+
+    <label for="descricao-produto">Descrição</label>
+    <textarea id="descricao-produto" rows="2" placeholder="Conte um pouco sobre o que você oferece"></textarea>
+
+    <button class="btn" style="margin-top:12px;" onclick="publicarProduto()">Publicar</button>
+  </div>
+
+  <div id="lista-produtos" class="grid"></div>
+
+  <div id="confirmacao-denuncia" class="mensagem-sucesso" style="background:#fff2e0; color:#7a4b00;"></div>
+
+  <div class="aviso" style="margin-top:20px;">
+    ⚠️ O selo "Vendedora verificada" simula uma checagem manual (documento + comprovante de negócio) que a
+    equipe do app faria antes de liberar o selo — no protótipo, ele só está marcado nos dados de exemplo.
+  </div>
+
+  <footer>Protótipo de estudo — ReMãe. Novos anúncios ficam só nesta sessão do navegador. · <a href="privacidade.html">Política de Privacidade</a></footer>
+</div>
+
+<script src="js/data.js"></script>
+<script>
+function abrirFormulario() {
+  document.getElementById('form-anuncio').classList.toggle('form-oculto');
+}
+
+function renderizarProdutos() {
+  const lista = document.getElementById('lista-produtos');
+  lista.innerHTML = produtos.map((p, i) => `
+    <div class="card">
+      <span class="tag sucesso">${p.categoria}</span>
+      ${p.verificado ? '<span class="tag selo">✔ Vendedora verificada</span>' : ''}
+      <h3 style="margin:8px 0 2px;">${p.nome}</h3>
+      <div class="empresa">por ${p.autora} · ${p.cidade}</div>
+      <p>${p.descricao}</p>
+      <strong>${p.preco}</strong>
+      <div style="margin-top:10px;">
+        <button class="denunciar-link" onclick="denunciarProduto(${i})">🚩 Denunciar anúncio</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function denunciarProduto(i) {
+  const msg = document.getElementById('confirmacao-denuncia');
+  msg.textContent = `Denúncia sobre "${produtos[i].nome}" enviada. Nossa equipe vai revisar em até 24h (simulação).`;
+  msg.style.display = 'block';
+  setTimeout(() => { msg.style.display = 'none'; }, 3500);
+}
+
+function publicarProduto() {
+  const nome = document.getElementById('nome-produto').value.trim();
+  const categoria = document.getElementById('categoria-produto').value.trim() || 'Geral';
+  const cidade = document.getElementById('cidade-produto').value.trim() || 'Não informado';
+  const descricao = document.getElementById('descricao-produto').value.trim();
+
+  if (!nome || !descricao) return;
+
+  produtos.unshift({
+    id: produtos.length + 1,
+    nome, autora: 'Você', categoria, preco: 'sob consulta', cidade, descricao
+  });
+
+  document.getElementById('nome-produto').value = '';
+  document.getElementById('categoria-produto').value = '';
+  document.getElementById('cidade-produto').value = '';
+  document.getElementById('descricao-produto').value = '';
+  document.getElementById('form-anuncio').classList.add('form-oculto');
+
+  renderizarProdutos();
+}
+
+renderizarProdutos();
+</script>
+
+</body>
+</html>

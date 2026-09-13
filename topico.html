@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ReMãe — Tópico</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="navbar-inner">
+    <a href="index.html" class="logo">Re<span>Mãe</span></a>
+    <div class="nav-links">
+      <a href="index.html">Início</a>
+      <a href="vagas.html">Vagas</a>
+      <a href="forum.html" class="ativo">Fórum</a>
+      <a href="comunidade.html">Comunidade</a>
+      <a href="empreendedorismo.html">Empreendedorismo</a>
+      <a href="direitos.html">Direitos</a>
+      <a href="simulador.html">Simulador IA</a>
+    </div>
+    <a href="perfil.html" class="nav-perfil"><span class="avatar">F</span></a>
+  </div>
+</nav>
+
+<div class="container">
+  <a href="forum.html" class="voltar">&larr; Voltar para o fórum</a>
+
+  <div id="conteudo-topico" class="card"></div>
+
+  <h3 style="margin-top:24px;">Respostas</h3>
+  <div id="lista-respostas"></div>
+
+  <div class="card" style="margin-top:16px;">
+    <label for="nova-resposta">Escreva uma resposta</label>
+    <textarea id="nova-resposta" rows="3" placeholder="Compartilhe sua experiência ou sua dúvida..."></textarea>
+    <button class="btn" style="margin-top:10px;" onclick="publicarResposta()">Publicar resposta</button>
+  </div>
+
+  <div id="confirmacao-denuncia" class="mensagem-sucesso" style="background:#fff2e0; color:#7a4b00;"></div>
+
+  <footer>Protótipo de estudo — ReMãe. Respostas novas ficam só nesta sessão do navegador. · <a href="privacidade.html">Política de Privacidade</a></footer>
+</div>
+
+<script src="js/data.js"></script>
+<script>
+const params = new URLSearchParams(window.location.search);
+const id = parseInt(params.get('id'));
+const topico = topicos.find(t => t.id === id);
+
+const conteudo = document.getElementById('conteudo-topico');
+const listaRespostas = document.getElementById('lista-respostas');
+
+function renderizarTopico() {
+  if (!topico) {
+    conteudo.innerHTML = '<p>Tópico não encontrado.</p>';
+    return;
+  }
+  conteudo.innerHTML = `
+    <div style="display:flex; justify-content:space-between; align-items:start; gap:12px;">
+      <h1 style="margin:0;">${topico.titulo}</h1>
+      <button class="btn secundario" style="white-space:nowrap;" onclick="denunciar('topico')">🚩 Denunciar</button>
+    </div>
+    <div class="topico-meta" style="margin-bottom:12px;">${topico.autora} · ${topico.data}</div>
+    <p>${topico.corpo}</p>
+  `;
+
+  listaRespostas.innerHTML = topico.respostas.map(r => `
+    <div class="resposta">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <div class="autora">${r.autora}</div>
+        <button class="denunciar-link" onclick="denunciar('resposta')">🚩 Denunciar</button>
+      </div>
+      <div>${r.texto}</div>
+    </div>
+  `).join('') || '<p style="color:var(--cor-texto-suave);">Ainda não há respostas. Seja a primeira a ajudar!</p>';
+}
+
+function denunciar(tipo) {
+  const msg = document.getElementById('confirmacao-denuncia');
+  msg.textContent = tipo === 'topico'
+    ? 'Denúncia do tópico enviada. Nossa equipe vai revisar em até 24h (simulação).'
+    : 'Denúncia da resposta enviada. Nossa equipe vai revisar em até 24h (simulação).';
+  msg.style.display = 'block';
+  setTimeout(() => { msg.style.display = 'none'; }, 3500);
+}
+
+function publicarResposta() {
+  const campo = document.getElementById('nova-resposta');
+  const texto = campo.value.trim();
+  if (!texto || !topico) return;
+
+  topico.respostas.push({ autora: 'Você', texto: texto });
+  campo.value = '';
+  renderizarTopico();
+}
+
+renderizarTopico();
+</script>
+
+</body>
+</html>
