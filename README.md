@@ -1,6 +1,6 @@
-# ReMãe — Protótipo
+# Mãe Conecta — Protótipo
 
-Protótipo navegável do app **ReMãe**. Cobre as 3 funcionalidades do MVP original
+Protótipo navegável do app **Mãe Conecta**. Cobre as 3 funcionalidades do MVP original
 (**vagas afirmativas**, **fórum de apoio estilo Reddit** e **empreendedorismo**) mais
 as áreas adicionadas na 2ª rodada: **simulador de currículo/entrevista com IA**,
 **direitos da mulher trabalhadora** e **comunidade estilo LinkedIn** — além de

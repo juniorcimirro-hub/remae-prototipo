@@ -1,6 +1,6 @@
 /*
   data.js
-  Dados de exemplo (mock) do protótipo ReMãe.
+  Dados de exemplo (mock) do protótipo Mãe Conecta.
   Nada aqui vem de um servidor de verdade — é só pra simular como o app
   funcionaria. Quando vocês tiverem um back-end real, essas listas viram
   respostas de API.
@@ -32,7 +32,7 @@ const vagas = [
   {
     id: 3,
     titulo: "Consultora de Vendas MEI",
-    empresa: "Autônoma / Rede de apoio ReMãe",
+    empresa: "Autônoma / Rede de apoio Mãe Conecta",
     modalidade: "Remoto",
     tipo: "Empreendedorismo",
     selo: false,

@@ -1,4 +1,4 @@
-# Dificuldades para tirar o ReMãe do papel — e possíveis soluções
+# Dificuldades para tirar o Mãe Conecta do papel — e possíveis soluções
 
 Este documento aprofunda os obstáculos reais de transformar este protótipo em um aplicativo
 publicado de verdade. A ideia é usar este material como base para o relatório do trabalho.
