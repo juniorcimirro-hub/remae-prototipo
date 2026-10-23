@@ -8,10 +8,20 @@
 </head>
 <body>
 
+<div class="preloader" id="preloader" role="status" aria-live="polite" aria-label="Carregando o site">
+  <div class="preloader-inner">
+    <div class="preloader-orb" aria-hidden="true"></div>
+    <p class="preloader-text">Preparando um espaço para você</p>
+    <div class="preloader-track"><span class="preloader-fill"></span></div>
+  </div>
+</div>
+
 <nav class="navbar">
   <div class="navbar-inner">
-    <a href="index.html" class="logo"><img src="img/logo2.png" alt="Mãe Conecta"></a>
- <button class="menu-toggle" aria-label="Abrir menu">☰</button><div class="nav-links"><a href="perfil.html" class="so-celular">Meu perfil</a>
+    <a href="index.html" class="logo"><img src="img/logo2.webp" alt="Mãe Conecta"></a>
+    <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false"></button>
+    <div class="nav-links">
+      <a href="perfil.html" class="so-celular">Meu perfil</a>
       <a href="index.html">Início</a>
       <a href="vagas.html">Vagas</a>
       <a href="forum.html" class="ativo">Fórum</a>
@@ -24,7 +34,7 @@
   </div>
 </nav>
 
-<div class="container">
+<main id="conteudo" class="container">
   <a href="forum.html" class="voltar">&larr; Voltar para o fórum</a>
 
   <div id="conteudo-topico" class="card"></div>
@@ -39,14 +49,13 @@
   </div>
 
   <div id="confirmacao-denuncia" class="mensagem-sucesso" style="background:#fff2e0; color:#7a4b00;"></div>
-
-  <footer>Protótipo de estudo — Mãe Conecta. Respostas novas ficam só nesta sessão do navegador. · <a href="privacidade.html">Política de Privacidade</a></footer>
-</div>
+</main>
 
 <script src="js/data.js"></script>
+<script src="js/icons.js"></script>
 <script>
 const params = new URLSearchParams(window.location.search);
-const id = parseInt(params.get('id'));
+const id = parseInt(params.get('id'), 10);
 const topico = topicos.find(t => t.id === id);
 
 const conteudo = document.getElementById('conteudo-topico');
@@ -58,9 +67,9 @@ function renderizarTopico() {
     return;
   }
   conteudo.innerHTML = `
-    <div style="display:flex; justify-content:space-between; align-items:start; gap:12px;">
+    <div class="topico-cabecalho">
       <h1 style="margin:0;">${topico.titulo}</h1>
-      <button class="btn secundario" style="white-space:nowrap;" onclick="denunciar('topico')">🚩 Denunciar</button>
+      <button class="btn secundario" style="white-space:nowrap;" onclick="denunciar('topico')">${ICON.flag} Denunciar</button>
     </div>
     <div class="topico-meta" style="margin-bottom:12px;">${topico.autora} · ${topico.data}</div>
     <p>${topico.corpo}</p>
@@ -70,7 +79,7 @@ function renderizarTopico() {
     <div class="resposta">
       <div style="display:flex; justify-content:space-between; align-items:center;">
         <div class="autora">${r.autora}</div>
-        <button class="denunciar-link" onclick="denunciar('resposta')">🚩 Denunciar</button>
+        <button class="denunciar-link" onclick="denunciar('resposta')">${ICON.flag} Denunciar</button>
       </div>
       <div>${r.texto}</div>
     </div>
@@ -99,5 +108,11 @@ function publicarResposta() {
 renderizarTopico();
 </script>
 
-   <script src="js/menu.js"></script></body>
+<script src="js/menu.js"></script>
+<script src="js/ui.js"></script>
+
+<div id="footer-placeholder"></div>
+
+<script src="js/components.js"></script>
+</body>
 </html>

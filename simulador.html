@@ -8,10 +8,20 @@
 </head>
 <body>
 
+<div class="preloader" id="preloader" role="status" aria-live="polite" aria-label="Carregando o site">
+  <div class="preloader-inner">
+    <div class="preloader-orb" aria-hidden="true"></div>
+    <p class="preloader-text">Preparando um espaço para você</p>
+    <div class="preloader-track"><span class="preloader-fill"></span></div>
+  </div>
+</div>
+
 <nav class="navbar">
   <div class="navbar-inner">
-    <a href="index.html" class="logo"><img src="img/logo2.png" alt="Mãe Conecta"></a>
- <button class="menu-toggle" aria-label="Abrir menu">☰</button><div class="nav-links"><a href="perfil.html" class="so-celular">Meu perfil</a>
+    <a href="index.html" class="logo"><img src="img/logo2.webp" alt="Mãe Conecta"></a>
+    <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false"></button>
+    <div class="nav-links">
+      <a href="perfil.html" class="so-celular">Meu perfil</a>
       <a href="index.html">Início</a>
       <a href="vagas.html">Vagas</a>
       <a href="forum.html">Fórum</a>
@@ -24,19 +34,21 @@
   </div>
 </nav>
 
-<div class="container">
-  <div class="page-header">
+<main id="conteudo" class="container">
+  <div class="page-header reveal">
+    <p class="kicker">Prática</p>
     <h1>Simulador de currículo e entrevista</h1>
     <p>O app monta um prompt pronto pra você colar em uma IA gratuita — assim não dependemos de uma IA paga
     dentro do próprio Mãe Conecta.</p>
   </div>
+
+  <img class="media reveal" src="img/illu-simulador.webp" alt="Mesa de estudo com notebook para treino de entrevista" style="max-height:260px; margin-bottom:24px;">
 
   <div class="abas">
     <button id="aba-curriculo-btn" class="ativo" onclick="mostrarAba('curriculo')">Currículo</button>
     <button id="aba-entrevista-btn" onclick="mostrarAba('entrevista')">Entrevista</button>
   </div>
 
-  <!-- ===== ABA CURRÍCULO ===== -->
   <div id="painel-curriculo">
     <div class="card">
       <label for="cv-nome">Nome</label>
@@ -57,15 +69,16 @@
     <div id="resultado-curriculo" class="card form-oculto" style="margin-top:16px;">
       <label for="texto-prompt-cv">Prompt pronto — copie e cole em uma IA gratuita</label>
       <textarea id="texto-prompt-cv" rows="6" readonly></textarea>
-      <button class="btn" style="margin-top:10px;" onclick="copiarTexto('texto-prompt-cv')">📋 Copiar prompt</button>
+      <button class="btn" style="margin-top:10px;" onclick="copiarTexto('texto-prompt-cv')">Copiar prompt</button>
       <p style="margin-top:14px; font-size:0.9rem; color:var(--cor-texto-suave);">Agora abra uma dessas IAs gratuitas e cole o prompt:</p>
-      <a class="btn secundario" href="https://chat.openai.com" target="_blank" rel="noopener">ChatGPT</a>
-      <a class="btn secundario" href="https://gemini.google.com" target="_blank" rel="noopener">Google Gemini</a>
-      <a class="btn secundario" href="https://copilot.microsoft.com" target="_blank" rel="noopener">Copilot</a>
+      <div class="ia-links">
+        <a class="btn secundario" href="https://chat.openai.com" target="_blank" rel="noopener">ChatGPT</a>
+        <a class="btn secundario" href="https://gemini.google.com" target="_blank" rel="noopener">Google Gemini</a>
+        <a class="btn secundario" href="https://copilot.microsoft.com" target="_blank" rel="noopener">Copilot</a>
+      </div>
     </div>
   </div>
 
-  <!-- ===== ABA ENTREVISTA ===== -->
   <div id="painel-entrevista" class="form-oculto">
     <div class="card">
       <div class="topico-meta">Pergunta simulada</div>
@@ -75,8 +88,8 @@
       <textarea id="resposta-usuaria" rows="3" placeholder="Escreva sua resposta aqui pra treinar..."></textarea>
 
       <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
-        <button class="btn" onclick="novaPergunta()">🔁 Nova pergunta</button>
-        <button class="btn secundario" onclick="alternarDica()">💡 Ver dica de resposta</button>
+        <button class="btn" onclick="novaPergunta()">Nova pergunta</button>
+        <button class="btn secundario" onclick="alternarDica()">Ver dica de resposta</button>
       </div>
 
       <div id="dica-resposta" class="aviso form-oculto" style="margin-top:14px;"></div>
@@ -90,18 +103,19 @@
       <div id="resultado-entrevista" class="form-oculto" style="margin-top:14px;">
         <label for="texto-prompt-entrevista">Prompt pronto — copie e cole em uma IA gratuita</label>
         <textarea id="texto-prompt-entrevista" rows="5" readonly></textarea>
-        <button class="btn" style="margin-top:10px;" onclick="copiarTexto('texto-prompt-entrevista')">📋 Copiar prompt</button>
+        <button class="btn" style="margin-top:10px;" onclick="copiarTexto('texto-prompt-entrevista')">Copiar prompt</button>
       </div>
     </div>
   </div>
 
   <div class="aviso" style="margin-top:20px;">
-    ⚠️ IAs gratuitas têm limite de uso e podem exigir cadastro após um tempo. Nunca coloque dados sensíveis
-    (como CPF ou endereço completo) nesses prompts.
+    <span class="aviso-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4m0 4h.01"/><path d="M10.3 4.9L2.8 18a2 2 0 0 0 1.7 3h15a2 2 0 0 0 1.7-3L13.7 4.9a2 2 0 0 0-3.4 0z"/></svg>
+    </span>
+    <span>IAs gratuitas têm limite de uso e podem exigir cadastro após um tempo. Nunca coloque dados sensíveis
+    (como CPF ou endereço completo) nesses prompts.</span>
   </div>
-
-  <footer>Protótipo de estudo — Mãe Conecta. · <a href="privacidade.html">Política de Privacidade</a></footer>
-</div>
+</main>
 
 <script>
 const perguntasEntrevista = [
@@ -154,7 +168,7 @@ function novaPergunta() {
 
 function alternarDica() {
   const dica = document.getElementById('dica-resposta');
-  dica.textContent = '💡 ' + perguntasEntrevista[indiceAtual].dica;
+  dica.textContent = perguntasEntrevista[indiceAtual].dica;
   dica.classList.toggle('form-oculto');
 }
 
@@ -180,5 +194,11 @@ async function copiarTexto(idCampo) {
 novaPergunta();
 </script>
 
-   <script src="js/menu.js"></script></body>
+<script src="js/menu.js"></script>
+<script src="js/ui.js"></script>
+
+<div id="footer-placeholder"></div>
+
+<script src="js/components.js"></script>
+</body>
 </html>

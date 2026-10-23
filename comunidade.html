@@ -8,10 +8,20 @@
 </head>
 <body>
 
+<div class="preloader" id="preloader" role="status" aria-live="polite" aria-label="Carregando o site">
+  <div class="preloader-inner">
+    <div class="preloader-orb" aria-hidden="true"></div>
+    <p class="preloader-text">Preparando um espaço para você</p>
+    <div class="preloader-track"><span class="preloader-fill"></span></div>
+  </div>
+</div>
+
 <nav class="navbar">
   <div class="navbar-inner">
-    <a href="index.html" class="logo"><img src="img/logo2.png" alt="Mãe Conecta"></a>
- <button class="menu-toggle" aria-label="Abrir menu">☰</button><div class="nav-links"><a href="perfil.html" class="so-celular">Meu perfil</a>
+    <a href="index.html" class="logo"><img src="img/logo2.webp" alt="Mãe Conecta"></a>
+    <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false"></button>
+    <div class="nav-links">
+      <a href="perfil.html" class="so-celular">Meu perfil</a>
       <a href="index.html">Início</a>
       <a href="vagas.html">Vagas</a>
       <a href="forum.html">Fórum</a>
@@ -24,11 +34,14 @@
   </div>
 </nav>
 
-<div class="container">
-  <div class="page-header">
+<main id="conteudo" class="container">
+  <div class="page-header reveal">
+    <p class="kicker">Rede</p>
     <h1>Comunidade</h1>
     <p>Compartilhe conquistas, peça ajuda, faça networking — um feed aberto entre todas as mães do Mãe Conecta.</p>
   </div>
+
+  <img class="media reveal" src="img/illu-comunidade.webp" alt="Mulheres reunidas em um círculo de apoio" style="max-height:280px; margin-bottom:20px; object-position:center 30%;">
 
   <div class="card" style="margin-bottom:20px;">
     <label for="novo-post">Compartilhar algo com a comunidade</label>
@@ -39,17 +52,16 @@
   <div id="feed"></div>
 
   <div id="confirmacao-denuncia" class="mensagem-sucesso" style="background:#fff2e0; color:#7a4b00;"></div>
-
-  <footer>Protótipo de estudo — Mãe Conecta. Publicações e curtidas ficam só nesta sessão do navegador. · <a href="privacidade.html">Política de Privacidade</a></footer>
-</div>
+</main>
 
 <script src="js/data.js"></script>
+<script src="js/icons.js"></script>
 <script>
 const rotulos = {
-  conquista: { texto: "🏆 Conquista", classe: "sucesso" },
-  divulgação: { texto: "📣 Divulgação", classe: "" },
-  "pedido de ajuda": { texto: "🙋 Pedido de ajuda", classe: "selo" },
-  networking: { texto: "🤝 Networking", classe: "" }
+  conquista: { texto: "Conquista", classe: "sucesso" },
+  divulgação: { texto: "Divulgação", classe: "" },
+  "pedido de ajuda": { texto: "Pedido de ajuda", classe: "selo" },
+  networking: { texto: "Networking", classe: "" }
 };
 
 function renderizarFeed() {
@@ -66,10 +78,10 @@ function renderizarFeed() {
         <span class="tag ${rotulo.classe}">${rotulo.texto}</span>
       </div>
       <p style="margin:12px 0;">${p.texto}</p>
-      <div style="display:flex; gap:16px; align-items:center;">
-        <button class="denunciar-link" style="color:var(--cor-primaria-escura); font-weight:600;" onclick="curtir(${i})">👍 Curtir (${p.curtidas})</button>
+      <div class="feed-actions">
+        <button class="denunciar-link" style="color:var(--cor-primaria-escura); font-weight:600;" onclick="curtir(${i})">${ICON.like} Curtir (${p.curtidas})</button>
         <span class="topico-meta">${p.comentarios.length} comentário(s)</span>
-        <button class="denunciar-link" onclick="denunciarPost(${i})">🚩 Denunciar</button>
+        <button class="denunciar-link" onclick="denunciarPost(${i})">${ICON.flag} Denunciar</button>
       </div>
       ${p.comentarios.map(c => `
         <div class="resposta" style="margin-top:10px;">
@@ -77,7 +89,7 @@ function renderizarFeed() {
           <div>${c.texto}</div>
         </div>
       `).join('')}
-      <div style="margin-top:10px; display:flex; gap:8px;">
+      <div class="comment-row">
         <input type="text" id="comentario-${i}" placeholder="Escreva um comentário..." style="flex:1;">
         <button class="btn secundario" onclick="comentar(${i})">Comentar</button>
       </div>
@@ -128,5 +140,11 @@ function publicarPost() {
 renderizarFeed();
 </script>
 
-   <script src="js/menu.js"></script></body>
+<script src="js/menu.js"></script>
+<script src="js/ui.js"></script>
+
+<div id="footer-placeholder"></div>
+
+<script src="js/components.js"></script>
+</body>
 </html>

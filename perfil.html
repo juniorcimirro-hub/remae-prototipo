@@ -8,10 +8,19 @@
 </head>
 <body>
 
+<di class="preloader" id="preloader" role="status" aria-live="polite" aria-label="Carregando o site">
+  <div class="preloader-inner">
+    <div class="preloader-orb" aria-hidden="true"></div>
+    <p class="preloader-text">Preparando um espaço para você</p>
+    <div class="preloader-track"><span class="preloader-fill"></span></div>
+  </div>
+</di
 <nav class="navbar">
   <div class="navbar-inner">
-    <a href="index.html" class="logo"><img src="img/logo2.png" alt="Mãe Conecta"></a>
- <button class="menu-toggle" aria-label="Abrir menu">☰</button><div class="nav-links"><a href="perfil.html" class="so-celular">Meu perfil</a>
+    <a href="index.html" class="logo"><img src="img/logo2.webp" alt="Mãe Conecta"></a>
+    <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false"></button>
+    <div class="nav-links">
+      <a href="perfil.html" class="so-celular">Meu perfil</a>
       <a href="index.html">Início</a>
       <a href="vagas.html">Vagas</a>
       <a href="forum.html">Fórum</a>
@@ -24,10 +33,11 @@
   </div>
 </nav>
 
-<div class="container">
-  <div class="perfil-topo">
+<main id="conteudo" class="container">
+  <div class="perfil-topo reveal">
     <span class="avatar">F</span>
     <div>
+      <p class="kicker">Conta</p>
       <h1 style="margin:0;">Fernanda Martins</h1>
       <p style="margin:0; color:var(--cor-texto-suave);">São Paulo - SP</p>
     </div>
@@ -68,9 +78,7 @@
 
     <div id="mensagem-sucesso" class="mensagem-sucesso">Perfil atualizado com sucesso!</div>
   </div>
-
-  <footer>Protótipo de estudo — Mãe Conecta. Todos os dados exibidos são fictícios. · <a href="privacidade.html">Política de Privacidade</a></footer>
-</div>
+</main>
 
 <script>
 function salvarPerfil() {
@@ -79,5 +87,11 @@ function salvarPerfil() {
 }
 </script>
 
-   <script src="js/menu.js"></script></body>
+<script src="js/menu.js"></script>
+<script src="js/ui.js"></script>
+
+<div id="footer-placeholder"></div>
+
+<script src="js/components.js"></script>
+</body>
 </html>

@@ -8,10 +8,21 @@
 </head>
 <body>
 
+<div class="preloader" id="preloader" role="status" aria-live="polite" aria-label="Carregando o site">
+  <div class="preloader-inner">
+    <div class="preloader-orb" aria-hidden="true"></div>
+    <p class="preloader-text">Preparando um espaço para você</p>
+    <div class="preloader-track"><span class="preloader-fill"></span></div>
+  </div>
+</div>
+
+
 <nav class="navbar">
   <div class="navbar-inner">
-    <a href="index.html" class="logo"><img src="img/logo2.png" alt="Mãe Conecta"></a>
- <button class="menu-toggle" aria-label="Abrir menu">☰</button><div class="nav-links"><a href="perfil.html" class="so-celular">Meu perfil</a>
+    <a href="index.html" class="logo"><img src="img/logo2.webp" alt="Mãe Conecta"></a>
+    <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false"></button>
+    <div class="nav-links">
+      <a href="perfil.html" class="so-celular">Meu perfil</a>
       <a href="index.html" class="ativo">Início</a>
       <a href="vagas.html">Vagas</a>
       <a href="forum.html">Fórum</a>
@@ -24,47 +35,99 @@
   </div>
 </nav>
 
-<div class="container">
+<main id="conteudo">
 
-  <div class="hero">
-    <h1>Bem-vinda de volta, Fernanda! 👋</h1>
-    <p>Aqui você encontra vagas afirmativas, uma rede de apoio entre mães e espaço para divulgar seu negócio.</p>
-  </div>
+  <!-- ===== HERO FULLSCREEN ===== -->
+  <section class="hero-full reveal">
 
-  <div class="grid">
-    <a href="vagas.html" class="card atalho-card">
-      <div class="icone">💼</div>
-      <h3>Vagas afirmativas</h3>
-      <p>6 vagas novas esta semana, com filtros por modalidade e tipo de contrato.</p>
-    </a>
+    <!-- Decorações internas -->
+    <div class="hero-deco-ring" aria-hidden="true"></div>
+    <div class="hero-deco-dots" aria-hidden="true"></div>
 
-    <a href="forum.html" class="card atalho-card">
-      <div class="icone">💬</div>
-      <h3>Rede de apoio</h3>
-      <p>Converse com outras mães sobre carreira, direitos trabalhistas e empreendedorismo.</p>
-    </a>
+    <!-- Lado esquerdo: copy -->
+    <div class="hero-copy">
+      <p class="kicker hero-kicker">Sua nova jornada começa aqui</p>
+      <h1 class="hero-h1">Bem-vinda de volta,<br><span class="hero-nome">Fernanda!</span></h1>
+      <p class="hero-sub">Aqui você encontra vagas afirmativas, uma rede de apoio entre mães e espaço para divulgar seu negócio.</p>
 
-    <a href="empreendedorismo.html" class="card atalho-card">
-      <div class="icone">🌱</div>
-      <h3>Empreendedorismo</h3>
-      <p>Conheça — ou divulgue — pequenos negócios de mães da comunidade.</p>
-    </a>
-  </div>
-
-  <h2 style="margin-top:32px; color:var(--cor-primaria-escura);">Em destaque no fórum</h2>
-  <div class="card" style="margin-top:12px;">
-    <div class="topico-item">
-      <h4><a href="topico.html?id=1">Como responder sobre o "gap" da maternidade no currículo?</a></h4>
-      <div class="topico-meta">Fernanda M. · Carreira e Direitos Trabalhistas · 2 respostas</div>
+      <div class="hero-ctas">
+        <div class="hero-cta-group">
+          <a href="vagas.html" class="btn btn-hero-primary">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="3"/><path d="M16 7V5a4 4 0 0 0-8 0v2"/></svg>
+            Ver Vagas
+          </a>
+          <span class="hero-cta-hint">6 novas essa semana</span>
+        </div>
+        <div class="hero-cta-group">
+          <a href="empreendedorismo.html" class="btn btn-hero-secondary">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            Empreendimentos
+          </a>
+          <span class="hero-cta-hint">Divulgue seu negócio</span>
+        </div>
+      </div>
     </div>
-    <div class="topico-item">
-      <h4><a href="topico.html?id=3">Vale a pena abrir MEI vendendo doces?</a></h4>
-      <div class="topico-meta">Patrícia L. · Empreendedorismo · 1 resposta</div>
+
+    <!-- Lado direito: imagem + balões -->
+    <div class="hero-visual">
+      <div class="hero-img-wrap">
+        <img src="img/hero-inicio.webp" alt="Duas mulheres conversando e trabalhando juntas em um ambiente acolhedor">
+
+        <!-- Balões flutuantes -->
+        <div class="hb hb-apoio">Apoio</div>
+        <div class="hb hb-retornar">Retornar</div>
+        <div class="hb hb-forca">Força</div>
+        <div class="hb hb-comunidade">Comunidade</div>
+        <div class="hb hb-direitos">Direitos</div>
+        <div class="hb hb-autonomia">Autonomia</div>
+      </div>
     </div>
-  </div>
 
-  <footer>Protótipo de estudo — Mãe Conecta. Todos os dados exibidos são fictícios. · <a href="privacidade.html">Política de Privacidade</a></footer>
-</div>
+  </section>
 
-   <script src="js/menu.js"></script></body>
+  <div class="container">
+
+    <div class="grid">
+      <a href="vagas.html" class="card atalho-card reveal delay-1">
+        <img class="media" src="img/illu-vagas.webp" alt="">
+        <h3>Vagas afirmativas</h3>
+        <p>6 vagas novas esta semana, com filtros por modalidade e tipo de contrato.</p>
+      </a>
+
+      <a href="forum.html" class="card atalho-card reveal delay-2">
+        <img class="media" src="img/illu-forum.webp" alt="">
+        <h3>Rede de apoio</h3>
+        <p>Converse com outras mães sobre carreira, direitos trabalhistas e empreendedorismo.</p>
+      </a>
+
+      <a href="empreendedorismo.html" class="card atalho-card reveal delay-3">
+        <img class="media" src="img/illu-negocio.webp" alt="">
+        <h3>Empreendedorismo</h3>
+        <p>Conheça — ou divulgue — pequenos negócios de mães da comunidade.</p>
+      </a>
+    </div>
+
+    <h2 class="section-title">Em destaque no fórum</h2>
+    <div class="card reveal delay-4">
+      <div class="topico-item">
+        <h4><a href="topico.html?id=1">Como responder sobre o "gap" da maternidade no currículo?</a></h4>
+        <div class="topico-meta">Fernanda M. · Carreira e Direitos Trabalhistas · 2 respostas</div>
+      </div>
+      <div class="topico-item">
+        <h4><a href="topico.html?id=3">Vale a pena abrir MEI vendendo doces?</a></h4>
+        <div class="topico-meta">Patrícia L. · Empreendedorismo · 1 resposta</div>
+      </div>
+    </div>
+
+  </div><!-- /.container -->
+
+</main>
+
+<script src="js/menu.js"></script>
+<script src="js/ui.js"></script>
+
+<div id="footer-placeholder"></div>
+
+<script src="js/components.js"></script>
+</body>
 </html>
