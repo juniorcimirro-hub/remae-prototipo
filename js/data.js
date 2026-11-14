@@ -79,13 +79,13 @@ const forumCategorias = [
   {
     id: "carreira",
     nome: "Carreira e Direitos Trabalhistas",
-    icone: "💼",
+    icone: "img/illu-vagas.webp",
     descricao: "Dúvidas sobre currículo, entrevistas, licença-maternidade, estabilidade e retorno ao mercado."
   },
   {
     id: "empreendedorismo",
     nome: "Empreendedorismo",
-    icone: "🌱",
+    icone: "img/illu-negocio.webp",
     descricao: "Trocas entre mães que vendem produtos ou serviços: precificação, divulgação, MEI e mais."
   }
 ];
@@ -225,10 +225,10 @@ const comunidadePosts = [
     autora: "Camila R.",
     cargo: "Analista Financeira · voltou ao mercado há 3 meses",
     tipo: "conquista",
-    texto: "Hoje fecho 3 meses no novo emprego! Depois de 2 anos fora do mercado, nunca achei que fosse conseguir conciliar tudo. Obrigada a quem me ajudou a revisar o currículo aqui no app 💛",
+    texto: "Hoje fecho 3 meses no novo emprego! Depois de 2 anos fora do mercado, nunca achei que fosse conseguir conciliar tudo. Obrigada a quem me ajudou a revisar o currículo aqui no app.",
     curtidas: 24,
     comentarios: [
-      { autora: "Fernanda M.", texto: "Que orgulho! Isso me dá esperança 😍" }
+      { autora: "Fernanda M.", texto: "Que orgulho! Isso me dá esperança." }
     ]
   },
   {
@@ -236,7 +236,7 @@ const comunidadePosts = [
     autora: "Patrícia L.",
     cargo: "Confeiteira e dona da Doces da Pati",
     tipo: "divulgação",
-    texto: "Gente, abri agenda para encomendas de fim de ano! Quem quiser experimentar meus brigadeiros gourmet, dá uma olhada na aba Empreendedorismo 🍫",
+    texto: "Gente, abri agenda para encomendas de fim de ano! Quem quiser experimentar meus brigadeiros gourmet, dá uma olhada na aba Empreendedorismo.",
     curtidas: 18,
     comentarios: []
   },
@@ -271,7 +271,8 @@ const produtos = [
     preco: "a partir de R$ 12,00",
     cidade: "Curitiba - PR",
     descricao: "Brownies artesanais, encomendas para festas e presentes corporativos.",
-    verificado: true
+    verificado: true,
+    imagem: "img/prod-doces.webp"
   },
   {
     id: 2,
@@ -281,7 +282,8 @@ const produtos = [
     preco: "sob consulta",
     cidade: "São Paulo - SP",
     descricao: "Bordados personalizados em roupas de bebê e enxovais.",
-    verificado: true
+    verificado: true,
+    imagem: "img/prod-artesanato.webp"
   },
   {
     id: 3,
@@ -291,7 +293,8 @@ const produtos = [
     preco: "a partir de R$ 80,00/hora",
     cidade: "Remoto",
     descricao: "Organização financeira pessoal e do pequeno negócio, planejamento de MEI.",
-    verificado: false
+    verificado: false,
+    imagem: "img/prod-consultoria.webp"
   },
   {
     id: 4,
@@ -301,6 +304,7 @@ const produtos = [
     preco: "a partir de R$ 35,00",
     cidade: "Belo Horizonte - MG",
     descricao: "Roupas infantis feitas com tecido reciclado e sob encomenda.",
-    verificado: true
+    verificado: true,
+    imagem: "img/prod-roupas.webp"
   }
 ];

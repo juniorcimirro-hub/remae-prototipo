@@ -8,49 +8,67 @@
 </head>
 <body>
 
+<div class="preloader" id="preloader" role="status" aria-live="polite" aria-label="Carregando o site">
+  <div class="preloader-inner">
+    <div class="preloader-orb" aria-hidden="true"></div>
+    <p class="preloader-text">Preparando um espaço para você</p>
+    <div class="preloader-track"><span class="preloader-fill"></span></div>
+  </div>
+</div>
+
 <div class="login-wrap">
-  <div class="card login-card">
-    <div class="logo" style="text-align:center; margin-bottom:18px;">Mãe Conecta</div>
+  <aside class="login-visual">
+    <p>Um espaço feito para você voltar ao mercado no seu tempo.</p>
+  </aside>
 
-    <div class="abas">
-      <button id="aba-entrar-btn" class="ativo" onclick="mostrarAba('entrar')">Entrar</button>
-      <button id="aba-cadastrar-btn" onclick="mostrarAba('cadastrar')">Cadastrar</button>
-    </div>
+  <div class="login-panel">
+    <div class="card login-card">
+      <div class="wordmark" style="text-align:center; margin-bottom:8px;">Mãe Conecta</div>
+      <p class="topico-meta" style="text-align:center; margin-bottom:18px;">Entre ou crie sua conta para continuar</p>
 
-    <form id="form-entrar" onsubmit="event.preventDefault(); window.location.href='index.html';">
-      <label for="email-entrar">E-mail</label>
-      <input type="email" id="email-entrar" placeholder="seuemail@exemplo.com" required>
+      <div class="abas">
+        <button id="aba-entrar-btn" class="ativo" onclick="mostrarAba('entrar')">Entrar</button>
+        <button id="aba-cadastrar-btn" onclick="mostrarAba('cadastrar')">Cadastrar</button>
+      </div>
 
-      <label for="senha-entrar">Senha</label>
-      <input type="password" id="senha-entrar" placeholder="••••••••" required>
+      <form id="form-entrar" onsubmit="event.preventDefault(); window.location.href='index.html';">
+        <label for="email-entrar">E-mail</label>
+        <input type="email" id="email-entrar" placeholder="seuemail@exemplo.com" required>
 
-      <button type="submit" class="btn" style="width:100%; margin-top:18px;">Entrar</button>
-    </form>
+        <label for="senha-entrar">Senha</label>
+        <input type="password" id="senha-entrar" placeholder="••••••••" required>
 
-    <form id="form-cadastrar" class="form-oculto" onsubmit="event.preventDefault(); window.location.href='index.html';">
-      <label for="nome-cad">Nome</label>
-      <input type="text" id="nome-cad" placeholder="Seu nome" required>
+        <button type="submit" class="btn" style="width:100%; margin-top:18px;">Entrar</button>
+      </form>
 
-      <label for="cidade-cad">Cidade</label>
-      <input type="text" id="cidade-cad" placeholder="Sua cidade" required>
+      <form id="form-cadastrar" class="form-oculto" onsubmit="event.preventDefault(); window.location.href='index.html';">
+        <label for="nome-cad">Nome</label>
+        <input type="text" id="nome-cad" placeholder="Seu nome" required>
 
-      <label for="email-cad">E-mail</label>
-      <input type="email" id="email-cad" placeholder="seuemail@exemplo.com" required>
+        <label for="cidade-cad">Cidade</label>
+        <input type="text" id="cidade-cad" placeholder="Sua cidade" required>
 
-      <label for="senha-cad">Senha</label>
-      <input type="password" id="senha-cad" placeholder="Crie uma senha" required>
+        <label for="email-cad">E-mail</label>
+        <input type="email" id="email-cad" placeholder="seuemail@exemplo.com" required>
 
-      <label style="display:flex; align-items:flex-start; gap:8px; font-weight:400; margin-top:16px;">
-        <input type="checkbox" required style="width:auto; margin-top:4px;">
-        <span>Li e aceito a <a href="privacidade.html" target="_blank" style="color:var(--cor-primaria-escura); font-weight:600;">Política de Privacidade e Termos de Uso</a></span>
-      </label>
+        <label for="senha-cad">Senha</label>
+        <input type="password" id="senha-cad" placeholder="Crie uma senha" required>
 
-      <button type="submit" class="btn" style="width:100%; margin-top:18px;">Criar conta</button>
-    </form>
+        <label style="display:flex; align-items:flex-start; gap:8px; font-weight:400; margin-top:16px;">
+          <input type="checkbox" required style="width:auto; margin-top:4px;">
+          <span>Li e aceito a <a href="privacidade.html" target="_blank" style="color:var(--cor-primaria-escura); font-weight:600;">Política de Privacidade e Termos de Uso</a></span>
+        </label>
 
-    <div class="aviso">
-      Este é um protótipo de estudo. Nenhum dado digitado aqui é enviado a um servidor —
-      é só para simular o fluxo de login/cadastro do app.
+        <button type="submit" class="btn" style="width:100%; margin-top:18px;">Criar conta</button>
+      </form>
+
+      <div class="aviso">
+        <span class="aviso-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4m0 4h.01"/><path d="M10.3 4.9L2.8 18a2 2 0 0 0 1.7 3h15a2 2 0 0 0 1.7-3L13.7 4.9a2 2 0 0 0-3.4 0z"/></svg>
+        </span>
+        <span>Este é um protótipo de estudo. Nenhum dado digitado aqui é enviado a um servidor —
+        é só para simular o fluxo de login/cadastro do app.</span>
+      </div>
     </div>
   </div>
 </div>
@@ -76,5 +94,11 @@ function mostrarAba(aba) {
 }
 </script>
 
-   <script src="js/menu.js"></script></body>
+<script src="js/menu.js"></script>
+<script src="js/ui.js"></script>
+
+<div id="footer-placeholder"></div>
+
+<script src="js/components.js"></script>
+</body>
 </html>
